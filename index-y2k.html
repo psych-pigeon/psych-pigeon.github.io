@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>yourname.net</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=VT323&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --panel: #d4d0c8;
+    --panel-light: #ffffff;
+    --panel-dark: #8f8b82;
+    --ink: #1a1a1a;
+    --ink-soft: #4a4640;
+    --line: #6f6b62;
+    --accent: #7a1f1f;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    background-color: #e8e4d8;
+    background-image:
+      radial-gradient(var(--panel-dark) 0.6px, transparent 0.6px);
+    background-size: 14px 14px;
+    color: var(--ink);
+    font-family: "Space Mono", monospace;
+    font-size: 15px;
+  }
+
+  a { color: var(--accent); }
+  a:hover { color: var(--ink); }
+
+  .page {
+    max-width: 1100px;
+    margin: 1.5rem auto;
+    border: 2px solid var(--line);
+    background: var(--panel);
+    box-shadow: 4px 4px 0 rgba(0,0,0,0.25);
+  }
+
+  /* ---- banner ---- */
+  .banner {
+    position: relative;
+    height: 150px;
+    overflow: hidden;
+    border-bottom: 2px solid var(--line);
+    background:
+      repeating-linear-gradient(45deg, #c9c4b6 0 2px, #d9d5c8 2px 16px);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 2rem;
+  }
+
+  .banner .crt {
+    position: absolute;
+    left: 2rem;
+    bottom: -10px;
+    width: 90px;
+    height: 70px;
+    background: #cfcfc4;
+    border: 2px solid var(--ink);
+    border-radius: 3px;
+  }
+  .banner .crt::before {
+    content: "";
+    position: absolute;
+    inset: 8px;
+    background: #3a3a34;
+  }
+  .banner .crt.c2 { left: 8rem; bottom: -6px; width: 110px; height: 82px; }
+  .banner .crt.c3 { left: 15rem; bottom: -14px; width: 80px; height: 60px; }
+
+  .banner .logo {
+    font-family: "Pirata One", cursive;
+    font-size: 3.4rem;
+    color: var(--ink);
+    text-shadow: 2px 2px 0 var(--panel-light);
+    z-index: 2;
+  }
+
+  .banner .tag {
+    position: absolute;
+    left: 2.2rem;
+    top: 1rem;
+    font-family: "VT323", monospace;
+    font-size: 0.95rem;
+    background: var(--panel-light);
+    border: 1px solid var(--ink);
+    padding: 0.2rem 0.5rem;
+    z-index: 2;
+  }
+
+  /* ---- layout ---- */
+  .body-grid {
+    display: grid;
+    grid-template-columns: 190px 1fr 260px;
+    gap: 1.1rem;
+    padding: 1.1rem;
+  }
+
+  @media (max-width: 900px) {
+    .body-grid { grid-template-columns: 1fr; }
+  }
+
+  .panel {
+    background: var(--panel-light);
+    border: 1px solid var(--line);
+    box-shadow: inset 1px 1px 0 #fff, 2px 2px 0 rgba(0,0,0,0.15);
+    padding: 0.9rem;
+    margin-bottom: 1rem;
+  }
+
+  .panel h3, .sidebar h4 {
+    font-family: "VT323", monospace;
+    font-size: 1.3rem;
+    letter-spacing: 0.03em;
+    margin: 0 0 0.6rem;
+    border-bottom: 1px dashed var(--line);
+    padding-bottom: 0.3rem;
+  }
+
+  /* ---- left sidebar nav ---- */
+  .sidebar h4 { text-align: center; }
+
+  .navlist {
+    list-style: none;
+    margin: 0 0 1rem;
+    padding: 0;
+  }
+
+  .navlist li a {
+    display: block;
+    text-decoration: none;
+    color: var(--ink);
+    background: var(--panel);
+    border: 1px solid var(--line);
+    padding: 0.35rem 0.6rem;
+    margin-bottom: 4px;
+    font-size: 0.85rem;
+  }
+
+  .navlist li a:hover {
+    background: var(--accent);
+    color: var(--panel-light);
+  }
+
+  .counter {
+    font-family: "VT323", monospace;
+    font-size: 1.6rem;
+    background: var(--ink);
+    color: #7CFC00;
+    text-align: center;
+    padding: 0.3rem;
+    letter-spacing: 0.2em;
+    margin-bottom: 0.6rem;
+  }
+
+  /* ---- center content ---- */
+  .intro-row {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .avatar-box {
+    flex: 0 0 64px;
+    height: 64px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "VT323", monospace;
+    font-size: 0.7rem;
+    color: var(--ink-soft);
+    text-align: center;
+  }
+
+  .intro-text { font-size: 0.92rem; line-height: 1.55; }
+
+  .warning-box {
+    border: 1px solid var(--accent);
+    background: #f6ecec;
+    padding: 0.6rem 0.8rem;
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+  }
+
+  .webring-box {
+    border: 1px solid var(--line);
+    padding: 0.6rem 0.8rem;
+    margin-bottom: 1rem;
+    font-size: 0.88rem;
+  }
+  .webring-box .who {
+    font-family: "VT323", monospace;
+    font-size: 1.1rem;
+  }
+
+  .badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 0.6rem;
+  }
+
+  .badge {
+    width: 88px;
+    height: 31px;
+    border: 1px solid var(--ink);
+    background: var(--panel);
+    font-family: "VT323", monospace;
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    line-height: 1.1;
+    color: var(--ink);
+  }
+
+  /* ---- player mockup ---- */
+  .player {
+    border: 1px solid var(--ink);
+    background: var(--panel);
+  }
+  .player .titlebar {
+    background: var(--ink);
+    color: var(--panel-light);
+    font-family: "VT323", monospace;
+    font-size: 0.9rem;
+    padding: 0.2rem 0.5rem;
+  }
+  .player .body {
+    padding: 0.7rem;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+  }
+  .player .playbtn {
+    width: 34px;
+    height: 34px;
+    background: var(--accent);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    flex: 0 0 auto;
+  }
+  .player .track {
+    flex: 1;
+    font-size: 0.85rem;
+  }
+  .player .bar {
+    height: 6px;
+    background: var(--panel-dark);
+    margin-top: 6px;
+    position: relative;
+  }
+  .player .bar::after {
+    content: "";
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 35%;
+    background: var(--accent);
+  }
+
+  /* ---- right sidebar ---- */
+  .chatbox {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    max-height: 220px;
+    overflow-y: auto;
+    font-size: 0.85rem;
+    margin-bottom: 0.6rem;
+  }
+  .chat-msg { border-bottom: 1px dashed var(--line); padding-bottom: 0.4rem; }
+  .chat-msg .who { font-weight: 700; }
+  .chat-msg .when { font-size: 0.7rem; color: var(--ink-soft); float: right; }
+
+  .chat-input {
+    display: flex;
+    gap: 4px;
+  }
+  .chat-input input {
+    flex: 1;
+    font-family: "Space Mono", monospace;
+    font-size: 0.8rem;
+    padding: 0.3rem;
+    border: 1px solid var(--line);
+  }
+  .chat-input button {
+    font-family: "VT323", monospace;
+    font-size: 0.9rem;
+    background: var(--ink);
+    color: #fff;
+    border: none;
+    padding: 0 0.7rem;
+    cursor: pointer;
+  }
+
+  .updates-log {
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+  .updates-log .entry { margin-bottom: 0.6rem; }
+  .updates-log .date { font-family: "VT323", monospace; color: var(--accent); }
+
+  footer {
+    text-align: center;
+    font-family: "VT323", monospace;
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    padding: 1rem;
+    border-top: 1px solid var(--line);
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ================= BANNER ================= -->
+  <div class="banner">
+    <span class="tag">please be nice. i love you.</span>
+    <div class="crt c1"></div>
+    <div class="crt c2"></div>
+    <div class="crt c3"></div>
+    <div class="logo">yourname</div>
+  </div>
+
+  <div class="body-grid">
+
+    <!-- ================= LEFT SIDEBAR ================= -->
+    <div class="sidebar">
+      <div class="panel">
+        <h4>visitor count</h4>
+        <div class="counter">000180</div>
+      </div>
+
+      <div class="panel">
+        <h4>&#9587; main &#9587;</h4>
+        <ul class="navlist">
+          <li><a href="#">sitemap</a></li>
+          <li><a href="#">home</a></li>
+          <li><a href="#">about</a></li>
+          <li><a href="#">art</a></li>
+          <li><a href="#">journal</a></li>
+          <li><a href="#">guides</a></li>
+          <li><a href="#">guestbook</a></li>
+        </ul>
+
+        <h4>&#9587; fun &#9587;</h4>
+        <ul class="navlist">
+          <li><a href="#">collections</a></li>
+          <li><a href="#">quizzes</a></li>
+          <li><a href="#">fanfiction</a></li>
+          <li><a href="#">manifesto</a></li>
+        </ul>
+
+        <h4>&#9587; other &#9587;</h4>
+        <ul class="navlist">
+          <li><a href="#">links</a></li>
+          <li><a href="#">archive</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ================= CENTER CONTENT ================= -->
+    <div class="main">
+
+      <div class="panel">
+        <div class="intro-row">
+          <div class="avatar-box">your<br>icon<br>here</div>
+          <p class="intro-text">
+            hello, i'm <strong>[name]</strong> and welcome to my corner of the web!
+            this is where i mess around with css and html whenever i get the urge.
+            the site's a permanent work in progress, so expect broken links and
+            random changes. want to link me? go for it &mdash; just leave a note
+            on my <a href="#">guestbook</a> so i know you're out there.
+          </p>
+        </div>
+      </div>
+
+      <div class="warning-box">
+        this site may contain mature themes (18+): dark humor, occasional
+        strong language, discussion of niche internet history. nothing
+        explicit. you've been warned.
+      </div>
+
+      <div class="webring-box">
+        <span class="who">webring &mdash;</span> join the ring! click below
+        to hop to the next site: <a href="#">&larr; prev</a> &middot;
+        <a href="#">random</a> &middot; <a href="#">next &rarr;</a>
+      </div>
+
+      <div class="panel">
+        <h3>elsewhere</h3>
+        <p style="font-size:0.9rem;">
+          reach me at <a href="mailto:you@example.com">you@example.com</a>
+          or leave a comment on my <a href="#">guestbook</a> and i'll get
+          back to you. currently listening to whatever's on the player below.
+        </p>
+        <div class="badge-row">
+          <div class="badge">made with<br>html &amp; css</div>
+          <div class="badge">no ai art<br>on this site</div>
+          <div class="badge">best viewed<br>at 1024&times;768</div>
+          <div class="badge">18+<br>site</div>
+          <div class="badge">powered by<br>caffeine</div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>now playing</h3>
+        <div class="player">
+          <div class="titlebar">WEB PLAYER &mdash; track 3 of 12</div>
+          <div class="body">
+            <div class="playbtn">&#9654;</div>
+            <div class="track">
+              some song &mdash; some artist
+              <div class="bar"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ================= RIGHT SIDEBAR ================= -->
+    <div class="right">
+      <div class="panel">
+        <h3>chatbox</h3>
+        <div class="chatbox">
+          <div class="chat-msg"><span class="when">7d ago</span><span class="who">amar:</span> so cute!!</div>
+          <div class="chat-msg"><span class="when">5d ago</span><span class="who">nab:</span> hello :)</div>
+          <div class="chat-msg"><span class="when">2d ago</span><span class="who">robin:</span> love the new layout</div>
+        </div>
+        <div class="chat-input">
+          <input type="text" placeholder="name">
+          <button>send</button>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>updates</h3>
+        <div class="updates-log">
+          <div class="entry"><span class="date">sep 4:</span> tweaked the sidebar, added the player widget.</div>
+          <div class="entry"><span class="date">aug 21:</span> finished the about page, working on a guestbook next.</div>
+          <div class="entry"><span class="date">aug 2:</span> site launched. still very much under construction.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>&copy; 2026 yourname.net &mdash; last updated sep 4</footer>
+
+</div>
+
+</body>
+</html>
